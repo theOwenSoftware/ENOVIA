@@ -1,14 +1,19 @@
 import requests
 from fastapi import FastAPI
-from functions import request_ticket_login, request_csrf, request_create_project
+from time import time
+from functions import request_ticket_login, request_csrf, request_project_create, request_project_search, request_project_search_ID
+from contextlib import asynccontextmanager
 
 app = FastAPI()
 session = requests.Session()
+login_url = "https://3de24xplm.com.tw/3dspace/ticket/login"
+csrf_url = "https://3de24xplm.com.tw/3dspace/resources/v1/application/CSRF"
+
 
 cert = "./3de24xplm.crt"
 infinite_ticket = "NkM1OEY5NEY3MEYzNEJEN0I3MjZFNDc2MDY2RTRDRjl8bmlra2l8fHx8MHw="
 security_context = "VPLMProjectLeader.Company Name.DEMO_CS"
-ENO_CSRF_TOKEN = ''
+
 
 # Body 定義
 body_create_project = {
@@ -56,31 +61,103 @@ body_create_project = {
 }
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Initialization logic (e.g., setting up shared state)
+    app.state.ENO_CSRF_TOKEN = ""  # 初始化為空字符串或其他有效值
 
+    app.state.LAST_PROJECT_ID = []  # Initialize as an empty list
+    print("Application startup")
+    yield  # This allows the app to run
+    # Cleanup logic (e.g., closing connections)
+    print("Application shutdown")
+
+# Create FastAPI app with lifespan
+app = FastAPI(lifespan=lifespan)
 
 # 定義路由
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
-
 @app.get("/login")
 def ticket_login():
     """調用封裝函數，執行 ticket_login"""
-    login_url = "https://3de24xplm.com.tw/3dspace/ticket/login"
-    response = request_ticket_login(session, login_url, infinite_ticket, cert)
-    return response 
+    current_time = time()
+    if hasattr(app.state, "last_login_time") and (current_time - app.state.last_login_time < 60):
+        return {"error": "Please wait before making another login request."}
+    
+    url = login_url
+    response = request_ticket_login(session, url, infinite_ticket, cert)
+    app.state.last_login_time = current_time  # 更新上次請求時間
+    return response
 
 @app.get("/csrf")
 def csrf_token():
     """調用封裝函數，獲取 CSRF Token"""
+    # url = csrf_url
+    current_time = time()
+    if hasattr(app.state, "last_CSRF_time") and (current_time - app.state.last_CSRF_time < 300):
+        return {"error": "Please wait before making another login request.",
+                "ENO_CSRF_TOKEN": app.state.ENO_CSRF_TOKEN}
+    
+    
     csrf_url = "https://3de24xplm.com.tw/3dspace/resources/v1/application/CSRF"
-    ENO_CSRF_TOKEN = request_csrf(session, csrf_url, cert)
-    return {"csrf_token": ENO_CSRF_TOKEN}
+
+    app.state.ENO_CSRF_TOKEN = request_csrf(session, csrf_url, cert)
+    return {"csrf_token":  app.state.ENO_CSRF_TOKEN}
+
+@app.get("/project")
+def project_search():
+    """Search for existing projects and store IDs."""
+    # app.state.ENO_CSRF_TOKEN = initialize_session(session, login_url, csrf_url, infinite_ticket, cert)
+    csrf_token = app.state.ENO_CSRF_TOKEN  # Get CSRF Token from shared state
+    project_search_url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
+    
+    # Make the request
+    response = request_project_search(session, project_search_url, infinite_ticket, security_context, csrf_token, cert)
+    
+    # Extract project IDs
+    if isinstance(response, dict) and 'data' in response:
+        last_project_ids = [item['id'] for item in response['data'] if 'id' in item]
+        app.state.LAST_PROJECT_ID = last_project_ids
+        return {"project_ids": last_project_ids}
+    
+    # return response  # 回應請求
+
+@app.get("/project/all")
+def project_search_all():
+    """Search for existing projects and store IDs."""
+    # app.state.ENO_CSRF_TOKEN = initialize_session(session, login_url, csrf_url, infinite_ticket, cert)
+    csrf_token = app.state.ENO_CSRF_TOKEN  # Get CSRF Token from shared state
+    project_search_url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
+    print("in main")
+    # Make the request
+    response = request_project_search(session, project_search_url, infinite_ticket, security_context, csrf_token, cert)
+    
+    return response  # 回應請求
+
+@app.get("/project/{ID}")
+def project_search_ID(ID: str):
+    """Search for a specific project by ID."""
+
+    csrf_token = app.state.ENO_CSRF_TOKEN  # Get CSRF Token from shared state
+    last_project_id = app.state.LAST_PROJECT_ID  # Get last accessed project IDs
+    
+    # Validate ID existence
+    if ID not in last_project_id:
+        return {"Error":"Project ID not found."}
+    # Construct URL and make the request
+    project_search_url = f"https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/{ID}"
+    response = request_project_search_ID(session, project_search_url, infinite_ticket, security_context, csrf_token, cert)
+    return response
 
 @app.post("/project/create")
-def request_create_project():
+def project_create():
     """調用封裝函數，新增 project"""
-    create_project_url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
-    response = request_create_project(session, create_project_url, infinite_ticket, security_context, ENO_CSRF_TOKEN, body_create_project, cert)
+
+    csrf_token = app.state.ENO_CSRF_TOKEN  # 從共享狀態獲取 CSRF Token
+
+    project_create_url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
+    response = request_project_create(session, project_create_url, infinite_ticket, security_context, csrf_token, body_create_project, cert)
     return response  # 回應請求
