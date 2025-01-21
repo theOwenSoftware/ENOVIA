@@ -1,19 +1,51 @@
 import requests
 from fastapi import FastAPI
 from time import time
-from functions import request_ticket_login, request_csrf, request_project_create, request_project_search, request_project_search_ID
 from contextlib import asynccontextmanager
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import List, Optional
+
+class DataElements(BaseModel):
+    title: str
+    description: Optional[str]
+    state: str
+
+class DataItem(BaseModel):
+    id: str
+    dataelements: DataElements
+
+class CreateProjectRequest(BaseModel):
+    data: List[DataItem]
+    data: List[DataItem]
+
+from flask import Flask
+from flask_cors import CORS
+from functions import (
+    request_ticket_login, request_csrf,
+    request_create_project,
+    request_search_project,
+    request_search_project_by_id,
+    request_fetch_project_issues_by_id,
+    request_delete_project_by_id,
+)
+from router import path
 
 app = FastAPI()
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+
 session = requests.Session()
 login_url = "https://3de24xplm.com.tw/3dspace/ticket/login"
 csrf_url = "https://3de24xplm.com.tw/3dspace/resources/v1/application/CSRF"
-
 
 cert = "./3de24xplm.crt"
 infinite_ticket = "NkM1OEY5NEY3MEYzNEJEN0I3MjZFNDc2MDY2RTRDRjl8bmlra2l8fHx8MHw="
 security_context = "VPLMProjectLeader.Company Name.DEMO_CS"
 
+app = FastAPI()
 
 # Body 定義
 body_create_project = {
@@ -95,50 +127,46 @@ def ticket_login():
 @app.get("/csrf")
 def csrf_token():
     """調用封裝函數，獲取 CSRF Token"""
-    # url = csrf_url
+    url = csrf_url
     current_time = time()
     if hasattr(app.state, "last_CSRF_time") and (current_time - app.state.last_CSRF_time < 300):
         return {"error": "Please wait before making another login request.",
                 "ENO_CSRF_TOKEN": app.state.ENO_CSRF_TOKEN}
-    
-    
-    csrf_url = "https://3de24xplm.com.tw/3dspace/resources/v1/application/CSRF"
 
-    app.state.ENO_CSRF_TOKEN = request_csrf(session, csrf_url, cert)
+    app.state.ENO_CSRF_TOKEN = request_csrf(session, url, cert)
     return {"csrf_token":  app.state.ENO_CSRF_TOKEN}
 
 @app.get("/project")
-def project_search():
+def search_project():
     """Search for existing projects and store IDs."""
-    # app.state.ENO_CSRF_TOKEN = initialize_session(session, login_url, csrf_url, infinite_ticket, cert)
     csrf_token = app.state.ENO_CSRF_TOKEN  # Get CSRF Token from shared state
-    project_search_url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
+    url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
     
     # Make the request
-    response = request_project_search(session, project_search_url, infinite_ticket, security_context, csrf_token, cert)
+    response = request_search_project(session, url, infinite_ticket, security_context, csrf_token, cert)
     
     # Extract project IDs
     if isinstance(response, dict) and 'data' in response:
         last_project_ids = [item['id'] for item in response['data'] if 'id' in item]
         app.state.LAST_PROJECT_ID = last_project_ids
+        print("project Id list have been update")
         return {"project_ids": last_project_ids}
     
     # return response  # 回應請求
 
 @app.get("/project/all")
-def project_search_all():
+def search_project_all():
     """Search for existing projects and store IDs."""
-    # app.state.ENO_CSRF_TOKEN = initialize_session(session, login_url, csrf_url, infinite_ticket, cert)
     csrf_token = app.state.ENO_CSRF_TOKEN  # Get CSRF Token from shared state
-    project_search_url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
+    url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
     print("in main")
     # Make the request
-    response = request_project_search(session, project_search_url, infinite_ticket, security_context, csrf_token, cert)
+    response = request_search_project(session, url, infinite_ticket, security_context, csrf_token, cert)
     
     return response  # 回應請求
 
 @app.get("/project/{ID}")
-def project_search_ID(ID: str):
+def search_project_by_id(ID: str):
     """Search for a specific project by ID."""
 
     csrf_token = app.state.ENO_CSRF_TOKEN  # Get CSRF Token from shared state
@@ -148,16 +176,72 @@ def project_search_ID(ID: str):
     if ID not in last_project_id:
         return {"Error":"Project ID not found."}
     # Construct URL and make the request
-    project_search_url = f"https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/{ID}"
-    response = request_project_search_ID(session, project_search_url, infinite_ticket, security_context, csrf_token, cert)
+    url = f"https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/{ID}"
+    response = request_search_project_by_id(session, url, infinite_ticket, security_context, csrf_token, cert)
     return response
 
+@app.get("/project/{ID}/issues")
+def search_project_issues_by_id(ID: str):
+    """Feach project issues by ID."""
+
+    csrf_token = app.state.ENO_CSRF_TOKEN  # Get CSRF Token from shared state
+    last_project_id = app.state.LAST_PROJECT_ID  # Get last accessed project IDs
+    
+    # Validate ID existence
+    if ID not in last_project_id:
+        return {"Error":"Project ID not found."}
+    # Construct URL and make the request
+    url = f"https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/{ID}/issues"
+    response = request_fetch_project_issues_by_id(session, url, infinite_ticket, security_context, csrf_token, cert)
+    return response
+
+@app.delete("/project/delete/{ID}/") 
+def delete_project_by_id(ID: str):
+    """Delete project by ID."""
+    csrf_token = app.state.ENO_CSRF_TOKEN  # Get CSRF Token from shared state
+    search_project()
+    last_project_id = app.state.LAST_PROJECT_ID  # Get last accessed project IDs
+
+    # Validate ID existence
+    if ID not in last_project_id:
+        return {
+            "error": "Project ID not found.",
+            "details": {
+                "project_id": ID,
+                "available_project_ids": last_project_id,
+            },
+        }
+    
+    # Construct URL and make the request
+    url = f"https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/{ID}"
+    response = request_delete_project_by_id(
+        session, url, infinite_ticket, security_context, csrf_token, cert
+    )
+    return response
+
+
 @app.post("/project/create")
-def project_create():
+async def create_project(request: CreateProjectRequest):
     """調用封裝函數，新增 project"""
-
     csrf_token = app.state.ENO_CSRF_TOKEN  # 從共享狀態獲取 CSRF Token
+    url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
+    req_body = request.model_dump()
 
-    project_create_url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
-    response = request_project_create(session, project_create_url, infinite_ticket, security_context, csrf_token, body_create_project, cert)
+    print(req_body)
+    response = request_create_project(session, url, infinite_ticket, security_context, csrf_token, req_body, cert)
     return response  # 回應請求
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+
+
+# app.include_router(ws_server.router)
+# app.include_router(path.router, prefix="/path")

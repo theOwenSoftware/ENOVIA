@@ -1,0 +1,6 @@
+GET http://192.168.50.192:8000/project HTTP/1.1
+# DELETE http://192.168.50.192:8000/project/delete/296466B000002408678F4FF7000009C2 HTTP/1.1
+# GET http://192.168.50.192:8000/project/296466B0000024086789EC550000095E HTTP/1.1
+# POST http://192.168.50.192:8000/project/create HTTP/1.1
+Authorization: Bearer your_token
+Content-Type: application/json
