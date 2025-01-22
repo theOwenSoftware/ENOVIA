@@ -19,6 +19,24 @@ class CreateProjectRequest(BaseModel):
     data: List[DataItem]
     data: List[DataItem]
 
+# ---------------------------------
+
+class DataElements_update(BaseModel):
+    title: str
+    name: str
+    description: Optional[str]
+    state: str
+    project: str
+    percentComplete: str
+
+class DataItem_update(BaseModel):
+    id: str
+    dataelements: DataElements_update
+
+class UpdateProjectRequest(BaseModel):
+    data: List[DataItem_update]
+
+
 from flask import Flask
 from flask_cors import CORS
 from functions import (
@@ -28,6 +46,8 @@ from functions import (
     request_search_project_by_id,
     request_fetch_project_issues_by_id,
     request_delete_project_by_id,
+    request_update_project,
+    request_update_project_by_id
 )
 from router import path
 
@@ -195,7 +215,7 @@ def search_project_issues_by_id(ID: str):
     response = request_fetch_project_issues_by_id(session, url, infinite_ticket, security_context, csrf_token, cert)
     return response
 
-@app.delete("/project/delete/{ID}/") 
+@app.delete("/project/delete/{ID}") 
 def delete_project_by_id(ID: str):
     """Delete project by ID."""
     csrf_token = app.state.ENO_CSRF_TOKEN  # Get CSRF Token from shared state
@@ -219,16 +239,29 @@ def delete_project_by_id(ID: str):
     )
     return response
 
+@app.put("/project/update") 
+def update_project(request: UpdateProjectRequest):
+    """ 更新 project內容 """
+    csrf_token = app.state.ENO_CSRF_TOKEN  # Get CSRF Token from shared state
+    url = f"https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects"
+    req_body = request.model_dump()
+    response = request_update_project(
+        session, url, infinite_ticket, security_context, csrf_token, req_body,cert
+    )
+    return response
+
 
 @app.post("/project/create")
 async def create_project(request: CreateProjectRequest):
     """調用封裝函數，新增 project"""
+    print("1111")
     csrf_token = app.state.ENO_CSRF_TOKEN  # 從共享狀態獲取 CSRF Token
     url = "https://3de24xplm.com.tw/3dspace/resources/v1/modeler/projects/"
     req_body = request.model_dump()
 
-    print(req_body)
-    response = request_create_project(session, url, infinite_ticket, security_context, csrf_token, req_body, cert)
+    response = request_create_project(
+        session, url, infinite_ticket, security_context, csrf_token, req_body, cert
+    )
     return response  # 回應請求
 
 

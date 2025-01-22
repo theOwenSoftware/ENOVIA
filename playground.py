@@ -218,3 +218,738 @@ except requests.exceptions.SSLError as e:
 except requests.exceptions.RequestException as e:
     print("請求錯誤：", e)
 
+{
+  "data": [
+    {
+      "id": "000000800000000C0000000000000000",
+      "type": "string",
+      "identifier": "000000800000000C0000000000000000",
+      "source": "https://3dspace.mydomain:443/3dspace",
+      "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+      "cestamp": "857FEB80000045FC5994CC0A00000012",
+      "dataelements": {
+        "description": "string",
+        "state": "string",
+        "estimatedStartDate": "string",
+        "estimatedFinishDate": "string",
+        "actualStartDate": "string",
+        "actualFinishDate": "string",
+        "nlsType": "string",
+        "color": "string",
+        "pattern": "string",
+        "ganttConfig": "string",
+        "kindofBaseline": "string",
+        "kindofExperiment": "string",
+        "kindofTemplate": "string",
+        "kindofConcept": "string",
+        "routeId": "string",
+        "columns": "string",
+        "estimatedDurationInputValue": "string",
+        "estimatedDuration": "string",
+        "forecastDuration": "string",
+        "forecastStartDate": "string",
+        "forecastFinishDate": "string",
+        "constraintType": "string",
+        "constraintDate": "string",
+        "defaultConstraintType": "string",
+        "scheduleFrom": "string",
+        "scheduleBasedOn": "string",
+        "projectVisibility": "string",
+        "currency": "string",
+        "notes": "string",
+        "status": "string"
+      },
+      "relelements": {
+        "sequenceOrder": "string"
+      },
+      "relateddata": {
+        "ownerInfo": [
+          {
+            "id": "000000800000000C0000000000000000",
+            "type": "string",
+            "identifier": "000000800000000C0000000000000000",
+            "source": "https://3dspace.mydomain:443/3dspace",
+            "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+            "cestamp": "857FEB80000045FC5994CC0A00000012",
+            "dataelements": {},
+            "relateddata": {
+              "calendar": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "title": "string",
+                    "default": "string"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "originatorInfo": [
+          {
+            "id": "000000800000000C0000000000000000",
+            "type": "string",
+            "identifier": "000000800000000C0000000000000000",
+            "source": "https://3dspace.mydomain:443/3dspace",
+            "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+            "cestamp": "857FEB80000045FC5994CC0A00000012",
+            "dataelements": {},
+            "relateddata": {
+              "calendar": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "title": "string",
+                    "default": "string"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "tasks": [
+          {
+            "id": "000000800000000C0000000000000000",
+            "type": "string",
+            "identifier": "000000800000000C0000000000000000",
+            "source": "https://3dspace.mydomain:443/3dspace",
+            "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+            "cestamp": "857FEB80000045FC5994CC0A00000012",
+            "dataelements": {
+              "title": "\n",
+              "description": "string",
+              "state": "Create",
+              "taskRequirement": "Optional",
+              "notes": "string",
+              "needsReview": "No",
+              "percentComplete": "string",
+              "estimatedStartDate": "string",
+              "dueDate": "string",
+              "estimatedDurationInputValue": "0.0",
+              "estimatedDurationInputUnit": "0.0",
+              "estimatedDuration": "0.0",
+              "actualStartDate": "string",
+              "actualFinishDate": "string",
+              "actualDuration": "string",
+              "forecastStartDate": "string",
+              "forecastFinishDate": "string",
+              "forecastDuration": "string",
+              "constraintType": "",
+              "constraintDate": "string",
+              "scheduleFrom": "Project Start Date",
+              "scheduleBasedOn": "Estimated",
+              "projectVisibility": "Members",
+              "routeTaskDueDate": "string",
+              "routeTaskApprovalAction": "Approve",
+              "routeTaskApprovalComments": "string",
+              "routeTaskReviewerComments": "string",
+              "freeFloat": "string",
+              "totalFloat": "string",
+              "isOverallCritical": "string",
+              "nlsType": "string",
+              "pattern": "string",
+              "color": "string",
+              "isSummaryTask": "string",
+              "effortId": "string",
+              "sourceId": "string",
+              "taskProjectId": "string",
+              "passiveSubtask": "string",
+              "criticalTask": "FALSE",
+              "Deviation": "string",
+              "predictiveActualFinishDate": "string"
+            },
+            "relelements": {
+              "sequenceOrder": "string"
+            },
+            "relateddata": {
+              "predecessors": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "title": "string"
+                  },
+                  "relelements": {
+                    "lagTime": "0.0",
+                    "dependencyType": "FS",
+                    "lagTimeInputUnit": "0.0",
+                    "lagTimeInputValue": "0.0",
+                    "From": "string",
+                    "predTaskSeqNumber": "string",
+                    "To": "string",
+                    "predProjectName": "string",
+                    "predProjectId": "string"
+                  }
+                }
+              ],
+              "ownerInfo": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {},
+                  "relateddata": {
+                    "calendar": [
+                      {
+                        "id": "000000800000000C0000000000000000",
+                        "type": "string",
+                        "identifier": "000000800000000C0000000000000000",
+                        "source": "https://3dspace.mydomain:443/3dspace",
+                        "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                        "cestamp": "857FEB80000045FC5994CC0A00000012",
+                        "dataelements": {
+                          "title": "string",
+                          "default": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "originatorInfo": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {},
+                  "relateddata": {
+                    "calendar": [
+                      {
+                        "id": "000000800000000C0000000000000000",
+                        "type": "string",
+                        "identifier": "000000800000000C0000000000000000",
+                        "source": "https://3dspace.mydomain:443/3dspace",
+                        "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                        "cestamp": "857FEB80000045FC5994CC0A00000012",
+                        "dataelements": {
+                          "title": "string",
+                          "default": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "references": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "description": "string",
+                    "state": "string"
+                  }
+                }
+              ],
+              "deliverables": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "name": "string",
+                    "revision": "string",
+                    "title": "\n",
+                    "synopsis": "string",
+                    "firstname": "Unknown",
+                    "lastname": "Unknown",
+                    "fullname": "Unknown",
+                    "objectId": "string",
+                    "policy": "string",
+                    "stateNLS": "string",
+                    "typeNLS": "string",
+                    "collabSpace": "string",
+                    "collabSpaceTitle": "string",
+                    "organization": "string",
+                    "organizationTitle": "string",
+                    "ownerFullname": "string",
+                    "hasfiles": [
+                      "string"
+                    ],
+                    "fileExtension": [
+                      "string"
+                    ],
+                    "linkURL": "string"
+                  }
+                }
+              ],
+              "route": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "name": "string"
+                  }
+                }
+              ],
+              "scopes": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "name": "string",
+                    "revision": "string",
+                    "title": "\n",
+                    "synopsis": "string",
+                    "firstname": "Unknown",
+                    "lastname": "Unknown",
+                    "fullname": "Unknown",
+                    "objectId": "string",
+                    "policy": "string",
+                    "stateNLS": "string",
+                    "typeNLS": "string",
+                    "collabSpace": "string",
+                    "collabSpaceTitle": "string",
+                    "organization": "string",
+                    "organizationTitle": "string",
+                    "ownerFullname": "string",
+                    "hasfiles": [
+                      "string"
+                    ],
+                    "fileExtension": [
+                      "string"
+                    ]
+                  }
+                }
+              ],
+              "contents": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "name": "string",
+                    "revision": "string",
+                    "title": "\n",
+                    "synopsis": "string",
+                    "firstname": "Unknown",
+                    "lastname": "Unknown",
+                    "fullname": "Unknown",
+                    "objectId": "string",
+                    "policy": "string",
+                    "stateNLS": "string",
+                    "typeNLS": "string",
+                    "collabSpace": "string",
+                    "collabSpaceTitle": "string",
+                    "organization": "string",
+                    "organizationTitle": "string",
+                    "ownerFullname": "string",
+                    "hasfiles": [
+                      "string"
+                    ],
+                    "fileExtension": [
+                      "string"
+                    ]
+                  }
+                }
+              ],
+              "assignees": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {},
+                  "relateddata": {
+                    "calendar": [
+                      {
+                        "id": "000000800000000C0000000000000000",
+                        "type": "string",
+                        "identifier": "000000800000000C0000000000000000",
+                        "source": "https://3dspace.mydomain:443/3dspace",
+                        "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                        "cestamp": "857FEB80000045FC5994CC0A00000012",
+                        "dataelements": {
+                          "title": "string",
+                          "default": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "calendar": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "title": "string",
+                    "default": "string"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "members": [
+          {
+            "id": "000000800000000C0000000000000000",
+            "type": "string",
+            "identifier": "000000800000000C0000000000000000",
+            "source": "https://3dspace.mydomain:443/3dspace",
+            "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+            "cestamp": "857FEB80000045FC5994CC0A00000012",
+            "dataelements": {},
+            "relelements": {},
+            "relateddata": {
+              "calendar": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "title": "string",
+                    "default": "string"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "risks": [
+          {
+            "id": "000000800000000C0000000000000000",
+            "type": "string",
+            "identifier": "000000800000000C0000000000000000",
+            "source": "https://3dspace.mydomain:443/3dspace",
+            "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+            "cestamp": "857FEB80000045FC5994CC0A00000012",
+            "dataelements": {
+              "description": "string",
+              "state": "string",
+              "estimatedStartDate": "string",
+              "estimatedFinishDate": "string",
+              "riskType": "Cost",
+              "riskVisibility": "Public",
+              "riskImpact": "1",
+              "riskProbability": "1",
+              "riskResolution": "string",
+              "riskAbatement": "string",
+              "measureOfSuccess": "string",
+              "riskCategory": ""
+            },
+            "relateddata": {
+              "assignees": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {},
+                  "relateddata": {
+                    "calendar": [
+                      {
+                        "id": "000000800000000C0000000000000000",
+                        "type": "string",
+                        "identifier": "000000800000000C0000000000000000",
+                        "source": "https://3dspace.mydomain:443/3dspace",
+                        "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                        "cestamp": "857FEB80000045FC5994CC0A00000012",
+                        "dataelements": {
+                          "title": "string",
+                          "default": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "ownerInfo": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {},
+                  "relateddata": {
+                    "calendar": [
+                      {
+                        "id": "000000800000000C0000000000000000",
+                        "type": "string",
+                        "identifier": "000000800000000C0000000000000000",
+                        "source": "https://3dspace.mydomain:443/3dspace",
+                        "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                        "cestamp": "857FEB80000045FC5994CC0A00000012",
+                        "dataelements": {
+                          "title": "string",
+                          "default": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "rpn": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {}
+                }
+              ]
+            }
+          }
+        ],
+        "subTypesInfo": [
+          {
+            "id": "000000800000000C0000000000000000",
+            "type": "string",
+            "identifier": "000000800000000C0000000000000000",
+            "source": "https://3dspace.mydomain:443/3dspace",
+            "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+            "cestamp": "857FEB80000045FC5994CC0A00000012"
+          }
+        ],
+        "issues": [
+          {
+            "id": "000000800000000C0000000000000000",
+            "type": "string",
+            "identifier": "000000800000000C0000000000000000",
+            "source": "https://3dspace.mydomain:443/3dspace",
+            "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+            "cestamp": "857FEB80000045FC5994CC0A00000012",
+            "dataelements": {
+              "description": "string",
+              "state": "string",
+              "estimatedFinishDate": "string",
+              "problemType": "Not Determined",
+              "priority": "Low",
+              "priorityInternal": "Unassigned",
+              "actionTaken": "string",
+              "resolution": "string",
+              "steps": "string"
+            },
+            "relateddata": {
+              "assignees": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {},
+                  "relateddata": {
+                    "calendar": [
+                      {
+                        "id": "000000800000000C0000000000000000",
+                        "type": "string",
+                        "identifier": "000000800000000C0000000000000000",
+                        "source": "https://3dspace.mydomain:443/3dspace",
+                        "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                        "cestamp": "857FEB80000045FC5994CC0A00000012",
+                        "dataelements": {
+                          "title": "string",
+                          "default": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "ownerInfo": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {},
+                  "relateddata": {
+                    "calendar": [
+                      {
+                        "id": "000000800000000C0000000000000000",
+                        "type": "string",
+                        "identifier": "000000800000000C0000000000000000",
+                        "source": "https://3dspace.mydomain:443/3dspace",
+                        "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                        "cestamp": "857FEB80000045FC5994CC0A00000012",
+                        "dataelements": {
+                          "title": "string",
+                          "default": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "originatorInfo": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {},
+                  "relateddata": {
+                    "calendar": [
+                      {
+                        "id": "000000800000000C0000000000000000",
+                        "type": "string",
+                        "identifier": "000000800000000C0000000000000000",
+                        "source": "https://3dspace.mydomain:443/3dspace",
+                        "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                        "cestamp": "857FEB80000045FC5994CC0A00000012",
+                        "dataelements": {
+                          "title": "string",
+                          "default": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "folders": [
+          {
+            "id": "000000800000000C0000000000000000",
+            "type": "string",
+            "identifier": "000000800000000C0000000000000000",
+            "source": "https://3dspace.mydomain:443/3dspace",
+            "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+            "cestamp": "857FEB80000045FC5994CC0A00000012",
+            "dataelements": {
+              "name": "string",
+              "description": "string",
+              "accessType": "Inherited",
+              "folderClassification": "Shared",
+              "title": "\n",
+              "originated": "string",
+              "modifyAccess": "string",
+              "addAccess": "string",
+              "removeAccess": "string",
+              "deleteAccess": "string",
+              "state": "Create",
+              "project": "string",
+              "organization": "string"
+            },
+            "relateddata": {
+              "content": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "name": "string",
+                    "revision": "string",
+                    "title": "\n",
+                    "synopsis": "string",
+                    "firstname": "Unknown",
+                    "lastname": "Unknown",
+                    "fullname": "Unknown",
+                    "objectId": "string",
+                    "policy": "string",
+                    "stateNLS": "string",
+                    "typeNLS": "string",
+                    "collabSpace": "string",
+                    "collabSpaceTitle": "string",
+                    "organization": "string",
+                    "organizationTitle": "string",
+                    "ownerFullname": "string",
+                    "hasfiles": [
+                      "string"
+                    ],
+                    "fileExtension": [
+                      "string"
+                    ]
+                  }
+                }
+              ],
+              "sovaccess": [
+                {
+                  "id": "000000800000000C0000000000000000",
+                  "type": "string",
+                  "identifier": "000000800000000C0000000000000000",
+                  "source": "https://3dspace.mydomain:443/3dspace",
+                  "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+                  "cestamp": "857FEB80000045FC5994CC0A00000012",
+                  "dataelements": {
+                    "orgnization": "string",
+                    "project": "string",
+                    "person": "string",
+                    "access": "string",
+                    "comment": "string"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "calendar": [
+          {
+            "id": "000000800000000C0000000000000000",
+            "type": "string",
+            "identifier": "000000800000000C0000000000000000",
+            "source": "https://3dspace.mydomain:443/3dspace",
+            "relativePath": "/resources/v1/modeler/samples/000000800000000C0000000000000000",
+            "cestamp": "857FEB80000045FC5994CC0A00000012",
+            "dataelements": {
+              "title": "string",
+              "default": "string"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

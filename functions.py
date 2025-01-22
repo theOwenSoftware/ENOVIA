@@ -71,6 +71,8 @@ def perform_request_with_retries(session, url, headers, cert, max_retries=2, met
                 headers["ENO_CSRF_TOKEN"] = request_csrf(session, csrf_url, cert)
             elif response.status_code == 500:
                 print(f"500 錯誤：服務端錯誤，第 {attempt + 1} 次重試")
+                # print(response.data)
+                # print(response.data.json())
                 request_ticket_login(session, login_url, headers.get("ticket"), cert)
             else:
                 print(f"請求失敗，狀態碼：{response.status_code}, 返回內容：{response.text}")
@@ -79,7 +81,9 @@ def perform_request_with_retries(session, url, headers, cert, max_retries=2, met
         except requests.exceptions.RequestException as e:
             print(f"請求發生錯誤（第 {attempt + 1} 次）：", e)
 
+        
     print("所有重試均失敗，操作失敗")
+
     return None
 
 # ----------------------------------------- Post Request (project)
@@ -123,7 +127,7 @@ def request_search_project(session, url, ticket, security_context, csrf_token, c
         "Accept": "application/json",
         "Content-Type": "application/json",
     }
-
+    print("11111")
    # 確保 CSRF Token 存在
     if not headers.get("ENO_CSRF_TOKEN"):
         print("尚未取得有效的 CSRF Token，嘗試重新登入")
@@ -215,6 +219,67 @@ def request_delete_project_by_id(session, url, ticket, security_context, csrf_to
 
     # 執行請求
     response = perform_request_with_retries(session, url, headers, cert, method="DELETE")    
+    if response:
+        try:
+            return response.json()
+        except ValueError:
+            print("返回的內容無法解析為 JSON")
+            return  response.text()
+
+    print("搜尋請求最終失敗")
+    return None
+
+# ----------------------------------------- Update Request (project)
+
+
+
+def request_update_project(session, url, ticket, security_context, csrf_token, req_body, cert):
+    """執行 create_project 請求"""
+    headers = {
+        "ENO_CSRF_TOKEN": csrf_token,
+        "ticket": ticket,
+        "SecurityContext": security_context,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+    if not headers.get("ENO_CSRF_TOKEN"):
+        print("尚未取得有效的 CSRF Token，嘗試重新登入")
+        request_ticket_login(session, login_url, ticket, cert)
+        headers["ENO_CSRF_TOKEN"] = request_csrf(session, csrf_url, cert)
+
+    # 執行請求
+    print("step2")
+    response = perform_request_with_retries(session, url, headers, cert, method="PUT", json=req_body)
+                 
+    if response:
+        try:
+            return response.json()
+        except ValueError:
+            print("返回的內容無法解析為 JSON")
+            return  response.text()
+
+    print("搜尋請求最終失敗")
+    return None
+
+
+def request_update_project_by_id(session, url, ticket, security_context, csrf_token, req_body, cert):
+    """執行 create_project 請求"""
+    headers = {
+        "ENO_CSRF_TOKEN": csrf_token,
+        "ticket": ticket,
+        "SecurityContext": security_context,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+    print(req_body)
+    if not headers.get("ENO_CSRF_TOKEN"):
+        print("尚未取得有效的 CSRF Token，嘗試重新登入")
+        request_ticket_login(session, login_url, ticket, cert)
+        headers["ENO_CSRF_TOKEN"] = request_csrf(session, csrf_url, cert)
+
+    # 執行請求
+    response = perform_request_with_retries(session, url, headers, cert, method="POST", json=req_body)
+                 
     if response:
         try:
             return response.json()
